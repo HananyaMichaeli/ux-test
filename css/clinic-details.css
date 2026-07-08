@@ -17,6 +17,7 @@
 }
 
 .clinic-logo {
+  position: relative;
   width: 84px;
   height: 84px;
   border-radius: var(--radius-lg);
@@ -28,6 +29,42 @@
   justify-content: center;
   font-size: 40px;
   flex-shrink: 0;
+  overflow: hidden;
+}
+
+.clinic-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.clinic-logo-edit-btn {
+  display: none;
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #fff;
+  border: 2px solid var(--color-surface);
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+}
+
+.clinic-logo-edit-btn:hover {
+  background: var(--color-primary-dark);
+}
+
+.clinic-logo-edit-btn .material-symbols-outlined {
+  font-size: 16px;
+}
+
+.clinic-logo.edit-mode .clinic-logo-edit-btn {
+  display: flex;
 }
 
 .clinic-profile-info {

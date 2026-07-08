@@ -81,9 +81,9 @@ function setEditMode(on) {
   document.getElementById('edit-toggle-btn').style.display = on ? 'none' : 'inline-flex';
   document.getElementById('save-btn').style.display = on ? 'inline-flex' : 'none';
 
-  document.querySelector('.clinic-profile-body').style.display = on ? 'none' : 'flex';
   document.getElementById('clinic-edit-form').style.display = on ? 'block' : 'none';
   document.getElementById('add-service-row').style.display = on ? 'flex' : 'none';
+  document.getElementById('clinic-logo').classList.toggle('edit-mode', on);
 
   renderHours();
   renderServices();
@@ -116,6 +116,25 @@ document.getElementById('new-service-input').addEventListener('keydown', (e) => 
     e.preventDefault();
     document.getElementById('add-service-btn').click();
   }
+});
+
+document.getElementById('clinic-logo-edit-btn').addEventListener('click', () => {
+  document.getElementById('clinic-logo-input').click();
+});
+
+document.getElementById('clinic-logo-input').addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    const img = document.getElementById('clinic-logo-img');
+    img.src = reader.result;
+    img.style.display = 'block';
+    document.getElementById('clinic-logo-emoji').style.display = 'none';
+    showToast('Clinic photo updated');
+  };
+  reader.readAsDataURL(file);
 });
 
 renderHours();
