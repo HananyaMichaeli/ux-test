@@ -1,0 +1,123 @@
+// Clinic details page mock data + interactions.
+
+const hours = [
+  { day: 'Monday', time: '08:00 AM – 06:00 PM', open: true },
+  { day: 'Tuesday', time: '08:00 AM – 06:00 PM', open: true },
+  { day: 'Wednesday', time: '08:00 AM – 06:00 PM', open: true },
+  { day: 'Thursday', time: '08:00 AM – 06:00 PM', open: true },
+  { day: 'Friday', time: '08:00 AM – 05:00 PM', open: true },
+  { day: 'Saturday', time: '09:00 AM – 02:00 PM', open: true },
+  { day: 'Sunday', time: 'Closed', open: false },
+];
+
+let services = [
+  'Wellness exams', 'Vaccinations', 'Dental care', 'Surgery',
+  'Grooming', 'Emergency care', 'Diagnostic imaging', 'Boarding',
+];
+
+const staff = [
+  { initials: 'SM', name: 'Dr. Sarah Miles', role: 'Head Veterinarian' },
+  { initials: 'AF', name: 'Dr. Alan Ford', role: 'Veterinary Surgeon' },
+  { initials: 'WZ', name: 'Dr. Wei Zhang', role: 'Veterinarian' },
+  { initials: 'RN', name: 'Rita Novak', role: 'Vet Technician' },
+];
+
+let editMode = false;
+
+function renderHours() {
+  const list = document.getElementById('hours-list');
+  list.innerHTML = hours.map((h, i) => `
+    <div class="hours-row">
+      <div class="hours-day">${h.day}</div>
+      <div class="hours-time">${h.open ? h.time : 'Closed'}</div>
+      <div class="hours-toggle ${h.open ? 'on' : ''} ${editMode ? '' : 'readonly'}" data-index="${i}">
+        <div class="knob"></div>
+      </div>
+    </div>
+  `).join('');
+
+  list.querySelectorAll('.hours-toggle').forEach((toggle) => {
+    toggle.addEventListener('click', () => {
+      const idx = Number(toggle.dataset.index);
+      hours[idx].open = !hours[idx].open;
+      renderHours();
+    });
+  });
+}
+
+function renderServices() {
+  const list = document.getElementById('services-list');
+  list.innerHTML = services.map((s, i) => `
+    <span class="chip">
+      ${s}
+      ${editMode ? `<button data-index="${i}" class="remove-service" aria-label="Remove ${s}"><span class="material-symbols-outlined" style="font-size:16px;">close</span></button>` : ''}
+    </span>
+  `).join('');
+
+  list.querySelectorAll('.remove-service').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const idx = Number(btn.dataset.index);
+      services.splice(idx, 1);
+      renderServices();
+    });
+  });
+}
+
+function renderStaff() {
+  const grid = document.getElementById('staff-grid');
+  grid.innerHTML = staff.map((s) => `
+    <div class="staff-card">
+      <div class="staff-avatar">${s.initials}</div>
+      <div class="staff-name">${s.name}</div>
+      <div class="staff-role">${s.role}</div>
+      <button class="btn btn-ghost btn-sm">View profile</button>
+    </div>
+  `).join('');
+}
+
+function setEditMode(on) {
+  editMode = on;
+
+  document.getElementById('edit-toggle-btn').style.display = on ? 'none' : 'inline-flex';
+  document.getElementById('save-btn').style.display = on ? 'inline-flex' : 'none';
+
+  document.querySelector('.clinic-profile-body').style.display = on ? 'none' : 'flex';
+  document.getElementById('clinic-edit-form').style.display = on ? 'block' : 'none';
+  document.getElementById('add-service-row').style.display = on ? 'flex' : 'none';
+
+  renderHours();
+  renderServices();
+}
+
+document.getElementById('edit-toggle-btn').addEventListener('click', () => setEditMode(true));
+
+document.getElementById('save-btn').addEventListener('click', () => {
+  document.getElementById('clinic-name-display').textContent = document.getElementById('edit-name').value;
+  document.getElementById('clinic-address-display').textContent = document.getElementById('edit-address').value;
+  document.getElementById('clinic-phone-display').textContent = document.getElementById('edit-phone').value;
+  document.getElementById('clinic-email-display').textContent = document.getElementById('edit-email').value;
+
+  setEditMode(false);
+  showToast('Clinic details saved');
+});
+
+document.getElementById('add-service-btn').addEventListener('click', () => {
+  const input = document.getElementById('new-service-input');
+  const value = input.value.trim();
+  if (value) {
+    services.push(value);
+    input.value = '';
+    renderServices();
+  }
+});
+
+document.getElementById('new-service-input').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    document.getElementById('add-service-btn').click();
+  }
+});
+
+renderHours();
+renderServices();
+renderStaff();

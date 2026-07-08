@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dashboard — VetCare Clinic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <svg class="logo-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="24" r="24" fill="#1B7F79"/>
+        <path d="M16.5 20.5c1.93 0 3.5-1.79 3.5-4s-1.57-4-3.5-4-3.5 1.79-3.5 4 1.57 4 3.5 4Z" fill="#fff"/>
+        <path d="M24 18.5c1.93 0 3.5-1.79 3.5-4S25.93 10.5 24 10.5s-3.5 1.79-3.5 4 1.57 4 3.5 4Z" fill="#fff"/>
+        <path d="M31.5 20.5c1.93 0 3.5-1.79 3.5-4s-1.57-4-3.5-4-3.5 1.79-3.5 4 1.57 4 3.5 4Z" fill="#fff"/>
+        <path d="M13 28.7c0-3.6 4.9-6.2 11-6.2s11 2.6 11 6.2c0 2.4-1.9 3.8-4.4 3.8-2.1 0-2.9-1-6.6-1s-4.5 1-6.6 1c-2.5 0-4.4-1.4-4.4-3.8Z" fill="#fff"/>
+      </svg>
+      <div>
+        <div class="brand-name">VetCare Clinic</div>
+        <div class="brand-sub">Practice management</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Main</div>
+      <a class="nav-item active" href="dashboard.html">
+        <span class="material-symbols-outlined">space_dashboard</span>
+        Dashboard
+      </a>
+      <a class="nav-item" href="#">
+        <span class="material-symbols-outlined">event</span>
+        Appointments
+      </a>
+      <a class="nav-item" href="#">
+        <span class="material-symbols-outlined">pets</span>
+        Patients
+      </a>
+      <a class="nav-item" href="clinic-details.html">
+        <span class="material-symbols-outlined">storefront</span>
+        Clinic details
+      </a>
+
+      <div class="nav-section-label">Manage</div>
+      <a class="nav-item" href="#">
+        <span class="material-symbols-outlined">receipt_long</span>
+        Billing
+      </a>
+      <a class="nav-item" href="#">
+        <span class="material-symbols-outlined">group</span>
+        Staff
+      </a>
+      <a class="nav-item" href="#">
+        <span class="material-symbols-outlined">settings</span>
+        Settings
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-pill">
+        <div class="avatar">SM</div>
+        <div>
+          <div class="user-name">Dr. Sarah Miles</div>
+          <div class="user-role">Head Veterinarian</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main area -->
+  <div class="main-area">
+
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="topbar-title">
+        <h1>Dashboard</h1>
+        <div class="breadcrumb">Overview of today's clinic activity</div>
+      </div>
+
+      <div class="topbar-search">
+        <span class="material-symbols-outlined">search</span>
+        <input type="text" placeholder="Search patients, owners, appointments..." />
+      </div>
+
+      <div class="topbar-actions">
+        <div class="popover-wrap">
+          <button class="icon-badge-btn" id="notif-btn" aria-label="Notifications">
+            <span class="material-symbols-outlined">notifications</span>
+            <span class="dot"></span>
+          </button>
+          <div class="popover" id="notif-panel">
+            <div class="popover-header">Notifications</div>
+            <div class="popover-list">
+              <div class="notif-item">
+                <div class="notif-icon" style="background:var(--color-info-bg); color:var(--color-info);">
+                  <span class="material-symbols-outlined">event</span>
+                </div>
+                <div class="notif-text">
+                  <div class="notif-title">New appointment booked for Max (Dog)</div>
+                  <div class="notif-time">10 minutes ago</div>
+                </div>
+              </div>
+              <div class="notif-item">
+                <div class="notif-icon" style="background:var(--color-warning-bg); color:var(--color-warning);">
+                  <span class="material-symbols-outlined">vaccines</span>
+                </div>
+                <div class="notif-text">
+                  <div class="notif-title">Vaccination due reminder — Bella</div>
+                  <div class="notif-time">1 hour ago</div>
+                </div>
+              </div>
+              <div class="notif-item">
+                <div class="notif-icon" style="background:var(--color-success-bg); color:var(--color-success);">
+                  <span class="material-symbols-outlined">task_alt</span>
+                </div>
+                <div class="notif-text">
+                  <div class="notif-title">Lab results ready for Rocky</div>
+                  <div class="notif-time">3 hours ago</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="popover-wrap">
+          <div class="user-pill" id="user-pill" style="cursor:pointer;">
+            <div class="avatar">SM</div>
+          </div>
+          <div class="popover user-menu" id="user-menu">
+            <div class="user-menu-item">
+              <span class="material-symbols-outlined">person</span> My profile
+            </div>
+            <div class="user-menu-item">
+              <span class="material-symbols-outlined">settings</span> Account settings
+            </div>
+            <div class="user-menu-divider"></div>
+            <div class="user-menu-item danger" id="logout-btn">
+              <span class="material-symbols-outlined">logout</span> Log out
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <main class="content">
+
+      <!-- Stat cards -->
+      <div class="grid grid-4 mb-24">
+        <div class="card">
+          <div class="card-body flex-between">
+            <div>
+              <div class="text-faint" style="font-size:13px; font-weight:600;">Today's appointments</div>
+              <div style="font-size:28px; font-weight:800; margin-top:6px;">14</div>
+              <div class="badge badge-success" style="margin-top:8px;">
+                <span class="material-symbols-outlined" style="font-size:14px;">trending_up</span> +3 vs yesterday
+              </div>
+            </div>
+            <div class="notif-icon" style="width:48px; height:48px; background:var(--color-primary-light); color:var(--color-primary);">
+              <span class="material-symbols-outlined">event</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body flex-between">
+            <div>
+              <div class="text-faint" style="font-size:13px; font-weight:600;">Total patients</div>
+              <div style="font-size:28px; font-weight:800; margin-top:6px;">2,486</div>
+              <div class="badge badge-info" style="margin-top:8px;">
+                <span class="material-symbols-outlined" style="font-size:14px;">pets</span> 32 new this month
+              </div>
+            </div>
+            <div class="notif-icon" style="width:48px; height:48px; background:var(--color-info-bg); color:var(--color-info);">
+              <span class="material-symbols-outlined">pets</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body flex-between">
+            <div>
+              <div class="text-faint" style="font-size:13px; font-weight:600;">Pending bills</div>
+              <div style="font-size:28px; font-weight:800; margin-top:6px;">$3,240</div>
+              <div class="badge badge-warning" style="margin-top:8px;">
+                <span class="material-symbols-outlined" style="font-size:14px;">schedule</span> 7 invoices
+              </div>
+            </div>
+            <div class="notif-icon" style="width:48px; height:48px; background:var(--color-warning-bg); color:var(--color-warning);">
+              <span class="material-symbols-outlined">receipt_long</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body flex-between">
+            <div>
+              <div class="text-faint" style="font-size:13px; font-weight:600;">Doctors available</div>
+              <div style="font-size:28px; font-weight:800; margin-top:6px;">5 / 8</div>
+              <div class="badge badge-neutral" style="margin-top:8px;">
+                <span class="material-symbols-outlined" style="font-size:14px;">groups</span> 3 on leave
+              </div>
+            </div>
+            <div class="notif-icon" style="width:48px; height:48px; background:var(--color-accent-light); color:var(--color-accent);">
+              <span class="material-symbols-outlined">stethoscope</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Appointments + quick actions -->
+      <div class="grid grid-2 mb-24">
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Upcoming appointments</h3>
+            <button class="btn btn-secondary btn-sm">
+              <span class="material-symbols-outlined" style="font-size:16px;">calendar_month</span>
+              View calendar
+            </button>
+          </div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Patient</th>
+                <th>Owner</th>
+                <th>Doctor</th>
+                <th>Time</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="appointments-body">
+              <!-- rows injected by js/dashboard.js -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Quick actions</h3>
+          </div>
+          <div class="card-body" style="display:flex; flex-direction:column; gap:10px;">
+            <button class="btn btn-primary" style="justify-content:flex-start;">
+              <span class="material-symbols-outlined" style="font-size:18px;">add_circle</span>
+              New appointment
+            </button>
+            <button class="btn btn-secondary" style="justify-content:flex-start;">
+              <span class="material-symbols-outlined" style="font-size:18px;">pets</span>
+              Register new patient
+            </button>
+            <button class="btn btn-secondary" style="justify-content:flex-start;">
+              <span class="material-symbols-outlined" style="font-size:18px;">receipt</span>
+              Create invoice
+            </button>
+            <button class="btn btn-secondary" style="justify-content:flex-start;">
+              <span class="material-symbols-outlined" style="font-size:18px;">vaccines</span>
+              Log vaccination
+            </button>
+
+            <div class="mt-24">
+              <div class="section-title" style="font-size:13px;">Clinic occupancy today</div>
+              <div style="background:var(--color-bg); border-radius:var(--radius-pill); height:10px; overflow:hidden; margin-top:10px;">
+                <div style="width:68%; height:100%; background:var(--color-primary); border-radius:var(--radius-pill);"></div>
+              </div>
+              <div class="text-faint" style="font-size:12px; margin-top:6px;">17 of 25 exam rooms booked</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent patients -->
+      <div class="card">
+        <div class="card-header">
+          <h3>Recent patients</h3>
+          <a href="#" class="forgot-link" style="color:var(--color-primary); font-weight:600; font-size:13px;">View all</a>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Pet</th>
+              <th>Species / breed</th>
+              <th>Owner</th>
+              <th>Last visit</th>
+              <th>Next due</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="patients-body">
+            <!-- rows injected by js/dashboard.js -->
+          </tbody>
+        </table>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<div class="toast" id="toast">
+  <span class="material-symbols-outlined">task_alt</span>
+  <span id="toast-msg">Done</span>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>
