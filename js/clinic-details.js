@@ -23,6 +23,7 @@ const staff = [
 ];
 
 let editMode = false;
+let editSnapshot = null;
 
 function renderHours() {
   const list = document.getElementById('hours-list');
@@ -79,6 +80,7 @@ function setEditMode(on) {
   editMode = on;
 
   document.getElementById('edit-toggle-btn').style.display = on ? 'none' : 'inline-flex';
+  document.getElementById('cancel-btn').style.display = on ? 'inline-flex' : 'none';
   document.getElementById('save-btn').style.display = on ? 'inline-flex' : 'none';
 
   document.getElementById('clinic-edit-form').style.display = on ? 'block' : 'none';
@@ -89,7 +91,45 @@ function setEditMode(on) {
   renderServices();
 }
 
-document.getElementById('edit-toggle-btn').addEventListener('click', () => setEditMode(true));
+function enterEditMode() {
+  const logoImg = document.getElementById('clinic-logo-img');
+
+  editSnapshot = {
+    hours: JSON.parse(JSON.stringify(hours)),
+    services: [...services],
+    logoSrc: logoImg.src,
+    logoVisible: logoImg.style.display,
+    emojiVisible: document.getElementById('clinic-logo-emoji').style.display,
+  };
+
+  document.getElementById('edit-name').value = document.getElementById('clinic-name-display').textContent;
+  document.getElementById('edit-address').value = document.getElementById('clinic-address-display').textContent;
+  document.getElementById('edit-phone').value = document.getElementById('clinic-phone-display').textContent;
+  document.getElementById('edit-email').value = document.getElementById('clinic-email-display').textContent;
+
+  setEditMode(true);
+}
+
+function cancelEditMode() {
+  if (editSnapshot) {
+    hours.splice(0, hours.length, ...editSnapshot.hours);
+    services.splice(0, services.length, ...editSnapshot.services);
+
+    const logoImg = document.getElementById('clinic-logo-img');
+    logoImg.src = editSnapshot.logoSrc;
+    logoImg.style.display = editSnapshot.logoVisible;
+    document.getElementById('clinic-logo-emoji').style.display = editSnapshot.emojiVisible;
+
+    editSnapshot = null;
+  }
+
+  document.getElementById('new-service-input').value = '';
+  setEditMode(false);
+}
+
+document.getElementById('edit-toggle-btn').addEventListener('click', enterEditMode);
+
+document.getElementById('cancel-btn').addEventListener('click', cancelEditMode);
 
 document.getElementById('save-btn').addEventListener('click', () => {
   document.getElementById('clinic-name-display').textContent = document.getElementById('edit-name').value;
@@ -97,6 +137,7 @@ document.getElementById('save-btn').addEventListener('click', () => {
   document.getElementById('clinic-phone-display').textContent = document.getElementById('edit-phone').value;
   document.getElementById('clinic-email-display').textContent = document.getElementById('edit-email').value;
 
+  editSnapshot = null;
   setEditMode(false);
   showToast('Clinic details saved');
 });
