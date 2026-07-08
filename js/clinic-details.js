@@ -96,6 +96,7 @@ document.getElementById('save-btn').addEventListener('click', () => {
   document.getElementById('clinic-address-display').textContent = document.getElementById('edit-address').value;
   document.getElementById('clinic-phone-display').textContent = document.getElementById('edit-phone').value;
   document.getElementById('clinic-email-display').textContent = document.getElementById('edit-email').value;
+  document.getElementById('clinic-manager-display').textContent = document.getElementById('edit-manager').value;
 
   setEditMode(false);
   showToast('Clinic details saved');

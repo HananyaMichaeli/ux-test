@@ -146,13 +146,17 @@
                 <span class="material-symbols-outlined text-faint" style="font-size:18px;">mail</span>
                 <span id="clinic-email-display">hello@vetcareclinic.example</span>
               </div>
+              <div class="flex gap-8">
+                <span class="material-symbols-outlined text-faint" style="font-size:18px;">person</span>
+                <span id="clinic-manager-display">Dr. Sarah Miles</span>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- Edit form (hidden by default) -->
         <div class="card-body clinic-edit-form" id="clinic-edit-form" style="display:none;">
-          <div class="grid grid-3">
+          <div class="grid grid-4">
             <div class="field">
               <label for="edit-name">Clinic name</label>
               <input class="input" id="edit-name" value="VetCare Clinic — Downtown" />
@@ -164,6 +168,10 @@
             <div class="field">
               <label for="edit-email">Email address</label>
               <input class="input" id="edit-email" value="hello@vetcareclinic.example" />
+            </div>
+            <div class="field">
+              <label for="edit-manager">Clinic manager name</label>
+              <input class="input" id="edit-manager" value="Dr. Sarah Miles" />
             </div>
           </div>
           <div class="field">
